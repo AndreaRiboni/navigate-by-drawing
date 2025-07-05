@@ -1,6 +1,6 @@
 # Navigate by Drawing
 
-A UI/UX experiment that lets you navigate a website by drawing icons on a canvas. Powered by a lightweight TensorFlow\.js CNN model, this project demonstrates how AI can enable creative, intuitive web navigation.
+A UI/UX experiment that lets you navigate a website by drawing icons on a canvas. Powered by a lightweight TensorFlow\.js CNN model, this project demonstrates how AI can enable creative, intuitive web navigation. Or maybe it is a showcase of how creativity can be sometimes silly.
 
 ---
 
