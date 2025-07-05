@@ -1,0 +1,10 @@
+version: '0.1'
+
+services:
+  caddy-static:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    container_name: caddy-static-server

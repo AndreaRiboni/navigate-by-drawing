@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Drawing UI</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.10.0/dist/tf.min.js"></script>
+		<script type="module" src="/js/main.js"></script>
+		<link rel="stylesheet" href="/css/style.css">
+	</head>
+	<body class="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white">
+		<!-- Navigation Bar -->
+		<nav class="bg-slate-800/50 backdrop-blur-md border-b border-slate-700 sticky top-0 z-50">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="flex justify-between items-center h-16">
+					<div class="flex items-center space-x-4">
+						<h1 class="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"> Draw to navigate </h1>
+						<span id="current-section" class="text-sm text-slate-400">Home</span>
+					</div>
+					<div class="flex items-center space-x-4">
+						<button id="help-btn" class="text-blue-400 hover:text-blue-300 transition-colors"> ❓ Help </button>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<div class="flex flex-col lg:flex-row min-h-screen">
+			<!-- Main Content Area -->
+			<div class="flex-1 p-6 lg:p-8">
+				<div id="content-area" class="max-w-4xl mx-auto">
+					<!-- Home Section -->
+					<section id="home-section" class="fade-in">
+						<div class="text-center mb-8">
+							<h2 class="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"> Be the artist </h2>
+							<p class="text-xl text-slate-300 mb-8">Navigate this website by drawing simple icons</p>
+						</div>
+						<div class="grid md:grid-cols-2 gap-6 mb-8">
+							<div class="bg-slate-800/50 backdrop-blur-md rounded-lg p-6 border border-slate-700">
+								<h3 class="text-lg font-semibold mb-3 text-blue-400">🎯 How it works</h3>
+								<p class="text-slate-300">Draw simple icons on the canvas to navigate between sections. The AI model will recognize your drawing and take you to the corresponding page.</p>
+							</div>
+							<div class="bg-slate-800/50 backdrop-blur-md rounded-lg p-6 border border-slate-700">
+								<h3 class="text-lg font-semibold mb-3 text-purple-400">🚀 Technicalities</h3>
+								<p class="text-slate-300">The underlying model is a simple CNN powered by TFJS. Not a GPT wrapper!</p>
+							</div>
+						</div>
+					</section>
+					<!-- Tutorial Section -->
+					<section id="tutorial-section" class="fade-in hidden">
+						<h2 class="text-3xl font-bold mb-6 text-blue-400">📚 Tutorial</h2>
+						<div class="space-y-6">
+							<div class="bg-slate-800/50 backdrop-blur-md rounded-lg p-6 border border-slate-700">
+								<h3 class="text-xl font-semibold mb-4 text-green-400">Step 1: The Canvas</h3>
+								<p class="text-slate-300 mb-4">The drawing canvas is located on the right/bottom side of your screen. It's a 224x224 pixel area where you can draw simple icons using your mouse or finger.</p>
+							</div>
+							<div class="bg-slate-800/50 backdrop-blur-md rounded-lg p-6 border border-slate-700">
+								<h3 class="text-xl font-semibold mb-4 text-blue-400">Step 2: Drawing Recognition</h3>
+								<p class="text-slate-300 mb-4">The small AI model recognizes six different icons: home, envelope, person, suitcase, book, and X. Draw clearly and simply for best results.</p>
+							</div>
+							<div class="bg-slate-800/50 backdrop-blur-md rounded-lg p-6 border border-slate-700">
+								<h3 class="text-xl font-semibold mb-4 text-purple-400">Step 3: Navigation Magic</h3>
+								<p class="text-slate-300">When the AI recognizes your drawing with over 90% confidence, it automatically navigates to the corresponding section.</p>
+							</div>
+							<div class="bg-slate-800/50 backdrop-blur-md rounded-lg p-6 border border-slate-700">
+								<h3 class="text-xl font-semibold mb-4 text-gold-400">Drawing Tips</h3>
+								<p class="text-slate-300">The house has a big, triangular roof; while the suitcase is very rectangular, not a square!</p>
+							</div>
+						</div>
+					</section>
+					<!-- Contact Section -->
+					<section id="contact-section" class="fade-in hidden">
+						<h2 class="text-3xl font-bold mb-6 text-red-400">📧 Contact</h2>
+						<div class="grid md:grid-cols-2 gap-6">
+							<div class="bg-slate-800/50 backdrop-blur-md rounded-lg p-6 border border-slate-700">
+								<h3 class="text-xl font-semibold mb-4 text-blue-400">Get in Touch</h3>
+								<p class="text-slate-300 mb-4">Feel free to reach out for collaborations, questions, or just to say hello! I'm always excited to connect with fellow developers and creative minds.</p>
+								<div class="space-y-3">
+									<div class="flex items-center space-x-3">
+										<span class="text-blue-400">
+											<a href="https://github.com/AndreaRiboni">GitHub</a>
+										</span>
+										<span class="text-slate-300">@AndreaRiboni</span>
+									</div>
+									<div class="flex items-center space-x-3">
+										<span class="text-blue-400">
+											<a href="https://www.linkedin.com/in/andrea-riboni/">Linkedin</a>
+										</span>
+										<span class="text-slate-300">Andrea Riboni</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					<!-- CV Section -->
+					<section id="cv-section" class="fade-in hidden">
+						<h2 class="text-3xl font-bold mb-6 text-yellow-400">💼 Work Experience</h2>
+						<div class="space-y-6">
+							<div class="bg-slate-800/50 backdrop-blur-md rounded-lg p-6 border border-slate-700">
+								<div class="space-y-4">
+									<div>
+										<h4 class="font-semibold text-blue-400">Princess of Hyrule</h4>
+										<p class="text-slate-400">Royal Family of Hyrule</p>
+										<p class="text-slate-300 mt-2">Leads the kingdom with wisdom and compassion, overseeing diplomatic relations and the protection of the Triforce.<br>Guides the people of Hyrule through times of peace and peril, and upholds ancient traditions.</p>
+									</div>
+									<div>
+										<h4 class="font-semibold text-blue-400">Sheikah Scholar</h4>
+										<p class="text-slate-400">Sheikah Tribe</p>
+										<p class="text-slate-300 mt-2">Studied ancient Sheikah technology and magic, mastering stealth, transformation, and arcane arts.<br>Worked in secret to aid the Hero of Time and safeguard Hyrule from shadowy threats.</p>
+									</div>
+									<div>
+										<h4 class="font-semibold text-blue-400">Guardian of the Triforce</h4>
+										<p class="text-slate-400">Sacred Realm</p>
+										<p class="text-slate-300 mt-2">Entrusted with the Triforce of Wisdom, responsible for maintaining balance and harmony across the realms.<br>Collaborates with heroes and sages to repel evil and restore light to Hyrule.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					<!-- Academic Path Section -->
+					<section id="education-section" class="fade-in hidden">
+						<h2 class="text-3xl font-bold mb-6 text-blue-400">📘 Academic Path</h2>
+						<div class="space-y-6">
+							<div class="bg-slate-800/50 backdrop-blur-md rounded-lg p-6 border border-slate-700">
+								<h3 class="text-xl font-semibold mb-4 text-purple-400">Education History</h3>
+								<div class="space-y-3">
+									<div>
+										<h4 class="font-semibold text-green-400">Heroic Training, Knight Academy</h4>
+										<p class="text-slate-400">Skyloft (Year of the Goddess - Year of the Hero)</p>
+										<p class="text-slate-300 text-sm">Specialized in swordsmanship, shield defense, and Loftwing riding. Graduated with the Master Sword of Honor.</p>
+									</div>
+									<div>
+										<h4 class="font-semibold text-green-400">Forest Survival & Puzzle Solving</h4>
+										<p class="text-slate-400">Kokiri Village (Childhood)</p>
+										<p class="text-slate-300 text-sm">Mentored by the Great Deku Tree. Coursework included slingshot accuracy, ocarina performance, and advanced rupee collection.</p>
+									</div>
+									<div>
+										<h4 class="font-semibold text-green-400">Ancient Relics & Dungeon Exploration</h4>
+										<p class="text-slate-400">Hyrule Field Studies (Ongoing)</p>
+										<p class="text-slate-300 text-sm">Hands-on experience with boomerangs, bombs, hookshots, and time travel. Thesis: "The Impact of Triforce Wisdom on Hyrulean Society."</p>
+									</div>
+								</div>
+							</div>
+							<div class="bg-slate-800/50 backdrop-blur-md rounded-lg p-6 border border-slate-700">
+								<h3 class="text-xl font-semibold mb-4 text-blue-400">Certifications & Skills</h3>
+								<div class="grid md:grid-cols-2 gap-4">
+									<div>
+										<h4 class="font-semibold text-yellow-400 mb-2">Technical Skills</h4>
+										<p class="text-slate-300 text-sm">Python, JavaScript, React, TensorFlow, PyTorch, AWS, Docker, Kubernetes</p>
+									</div>
+									<div>
+										<h4 class="font-semibold text-yellow-400 mb-2">Certifications</h4>
+										<p class="text-slate-300 text-sm">AWS Solutions Architect, Google Cloud ML Engineer, TensorFlow Developer</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					<!-- Bio Section -->
+					<section id="bio-section" class="fade-in hidden">
+						<h2 class="text-3xl font-bold mb-6 text-purple-400">👤 About myself</h2>
+						<div class="space-y-6">
+							<div class="bg-slate-800/50 backdrop-blur-md rounded-lg p-6 border border-slate-700">
+								<p class="text-slate-300 mb-4">I am Princess Zelda, guardian of Hyrule and bearer of the Triforce of Wisdom. My journey has led me through ancient temples, royal courts, and the mysteries of magic and destiny.</p>
+								<p class="text-slate-300 mb-4">Whether guiding the Hero of Time, deciphering ancient prophecies, or defending my kingdom from the forces of darkness, I strive to bring hope and light to all corners of the realm.</p>
+								<p class="text-slate-300 mb-4">I am devoted to learning, diplomacy, and the well-being of my people. My studies in Sheikah lore and arcane arts have taught me that true strength lies in wisdom, courage, and compassion.</p>
+								<p class="text-slate-300">When not fulfilling royal duties, I enjoy playing the harp, exploring the lands of Hyrule, and seeking new ways to unite our world in peace and harmony.</p>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+			<!-- Drawing Canvas Panel -->
+			<div class="w-full lg:w-80 bg-slate-800/50 backdrop-blur-md border-l border-slate-700 p-6">
+				<div class="sticky top-24">
+					<h3 class="text-lg font-semibold mb-4 text-center">🎨 Draw here</h3>
+					<div class="flex justify-center mb-4">
+						<canvas id="draw-canvas" width="224" height="224" class="border-2 border-slate-600 rounded-lg bg-white touch-none glow"></canvas>
+					</div>
+                    <div class="flex justify-center space-x-2 mb-4">
+                        <p id="result"></p>
+                    </div>
+					<div class="flex justify-center space-x-2 mb-4">
+						<button id="clear-btn" class="px-4 py-2 bg-slate-600 hover:bg-slate-500 text-white rounded-lg transition-colors"> 🗑️ Clear </button>
+					</div>
+					<div id="prediction-result" class="text-center text-sm text-slate-400 mb-4"> Draw an icon to navigate </div>
+					<div class="text-xs text-slate-500 text-center">
+						<p>Required: confidence > 90% to navigate</p>
+					</div>
+					<div id="icon-probabilities" class="mt-6 space-y-2">
+						<div class="text-xs text-center text-slate-400 mb-1">Prediction Probabilities</div>
+						<div class="grid grid-cols-6 gap-2">
+							<div class="flex flex-col items-center space-y-1">
+								<div class="w-full h-2 bg-slate-700 rounded overflow-hidden">
+									<div id="bar-book" class="h-2 bg-blue-400 transition-all duration-300" style="width: 0%"></div>
+								</div>
+								<img src="/img/book.png" class="w-8 h-8 filter invert opacity-80" alt="book">
+							</div>
+							<div class="flex flex-col items-center space-y-1">
+								<div class="w-full h-2 bg-slate-700 rounded overflow-hidden">
+									<div id="bar-email" class="h-2 bg-blue-400 transition-all duration-300" style="width: 0%"></div>
+								</div>
+								<img src="/img/email.png" class="w-8 h-8 filter invert opacity-80" alt="email">
+							</div>
+							<div class="flex flex-col items-center space-y-1">
+								<div class="w-full h-2 bg-slate-700 rounded overflow-hidden">
+									<div id="bar-home" class="h-2 bg-blue-400 transition-all duration-300" style="width: 0%"></div>
+								</div>
+								<img src="/img/home.png" class="w-8 h-8 filter invert opacity-80" alt="home">
+							</div>
+							<div class="flex flex-col items-center space-y-1">
+								<div class="w-full h-2 bg-slate-700 rounded overflow-hidden">
+									<div id="bar-person" class="h-2 bg-blue-400 transition-all duration-300" style="width: 0%"></div>
+								</div>
+								<img src="/img/person.png" class="w-8 h-8 filter invert opacity-80" alt="person">
+							</div>
+							<div class="flex flex-col items-center space-y-1">
+								<div class="w-full h-2 bg-slate-700 rounded overflow-hidden">
+									<div id="bar-bag" class="h-2 bg-blue-400 transition-all duration-300" style="width: 0%"></div>
+								</div>
+								<img src="/img/bag.png" class="w-8 h-8 filter invert opacity-80" alt="bag">
+							</div>
+							<div class="flex flex-col items-center space-y-1">
+								<div class="w-full h-2 bg-slate-700 rounded overflow-hidden">
+									<div id="bar-close" class="h-2 bg-blue-400 transition-all duration-300" style="width: 0%"></div>
+								</div>
+								<img src="/img/close.png" class="w-8 h-8 filter invert opacity-80" alt="close">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Help Modal -->
+		<div id="help-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+			<div class="flex items-center justify-center min-h-screen p-4">
+				<div class="bg-slate-800 rounded-lg p-6 max-w-md w-full border border-slate-700">
+					<h3 class="text-xl font-semibold mb-4 text-blue-400">🎯 How to Use DrawUI</h3>
+					<div class="space-y-3 text-slate-300 text-sm">
+						<p>1. Draw simple icons on the canvas</p>
+						<p>2. When confidence > 90%, navigation happens automatically</p>
+						<p>3. Available icons: home, envelope, person, suitcase, x</p>
+						<p>4. Keep drawings simple and clear</p>
+					</div>
+					<button id="close-help" class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition-colors"> Got it! </button>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
